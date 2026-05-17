@@ -1,6 +1,6 @@
 import { useRealtime } from "./hooks/useRealtime";
 import { Bot, Mic, Volume2, AudioLines, User } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 
@@ -169,6 +169,14 @@ export default function App() {
     liveUserText,
     toggleRecording,
   } = useRealtime();
+
+  // Wake up the Render backend on app load so it doesn't sleep
+  useEffect(() => {
+    const API_URL = import.meta.env.VITE_API_URL || "";
+    fetch(`${API_URL}/`).catch(() => {
+      // Ignore errors, we just want to send the request
+    });
+  }, []);
 
   return (
     <div style={{
