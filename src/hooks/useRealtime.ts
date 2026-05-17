@@ -24,10 +24,12 @@ export function useRealtime() {
     const dataChannelRef = useRef<RTCDataChannel | null>(null);
     const lastUserText = useRef(""); // store last user text for analysis
 
+    const API_URL = import.meta.env.VITE_API_URL || "";
+
     // Fetch analysis from Chat API (silent — no voice), then trigger spoken question
     async function fetchAnalysisThenQuestion(userText: string) {
         try {
-            const res = await fetch("http://localhost:3001/analyze", {
+            const res = await fetch(`${API_URL}/analyze`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ userText }),
@@ -63,7 +65,7 @@ export function useRealtime() {
             userTextRef.current = "";
             lastUserText.current = "";
 
-            const sessionRes = await fetch("http://localhost:3001/session", {
+            const sessionRes = await fetch(`${API_URL}/session`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ voice: "shimmer", speed: 1 }),
@@ -117,6 +119,13 @@ export function useRealtime() {
                 }));
 
                 // Opening greeting — spoken
+                const topics = [
+                    "hobbies", "travel", "food", "movies", "daily routine", 
+                    "technology", "music", "sports", "books", "goals",
+                    "weekends", "pets", "weather", "shopping", "childhood memories"
+                ];
+                const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+
                 dataChannel.send(JSON.stringify({
                     type: "conversation.item.create",
                     item: {
@@ -124,7 +133,7 @@ export function useRealtime() {
                         role: "user",
                         content: [{
                             type: "input_text",
-                            text: "Greet me warmly and ask one simple English question.",
+                            text: `Greet me warmly and ask one simple English question about ${randomTopic} to start our conversation. Be creative and dynamic, do not repeat exactly the same greeting every time.`,
                         }],
                     },
                 }));

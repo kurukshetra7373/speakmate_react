@@ -92,9 +92,9 @@ function Card({
 // ── feedback cards ────────────────────────────────────────────────────────────
 function FeedbackCards({ text }: { text: string }) {
   const mistakes = extractSection(text, "MISTAKES");
-  const correct  = extractSection(text, "CORRECT");
-  const why      = extractSection(text, "WHY");
-  const native   = extractSection(text, "NATIVE");
+  const correct = extractSection(text, "CORRECT");
+  const why = extractSection(text, "WHY");
+  const native = extractSection(text, "NATIVE");
 
   // Plain AI message — opening question or no sections found
   if (!mistakes && !correct && !why && !native) {

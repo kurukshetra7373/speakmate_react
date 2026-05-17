@@ -1,11 +1,12 @@
 {
-  "name": "server",
-  "type": "module",
+  "name": "speakmate-backend",
   "version": "1.0.0",
   "description": "SpeakMate AI Backend",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node --watch index.js"
+    "start": "node index.js",
+    "dev": "node --watch index.js"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +15,8 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

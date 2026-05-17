@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: speakmate-backend
+    runtime: node
+    repo: https://github.com/your-username/speakmate_react # Replace with your actual repository URL if using Blueprint
+    plan: free # Can be 'free', 'starter', etc.
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false # Set this securely in the Render Dashboard
+      - key: NODE_VERSION
+        value: 20
