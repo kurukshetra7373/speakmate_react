@@ -2,7 +2,7 @@ services:
   - type: web
     name: speakmate-backend
     runtime: node
-    repo: https://github.com/your-username/speakmate_react # Replace with your actual repository URL if using Blueprint
+    repo: https://github.com/kurukshetra7373/speakmate_react # Replace with your actual repository URL if using Blueprint
     plan: free # Can be 'free', 'starter', etc.
     rootDir: server
     buildCommand: npm install
